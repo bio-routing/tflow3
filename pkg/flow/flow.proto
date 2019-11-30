@@ -7,12 +7,11 @@ option go_package = "github.com/bio-routing/tflow3/pkg/flow";
 
 message IPAddress {
     bio.net.IP addr = 1;
-    Prefix prefix = 2;
     map<string, string> metadata = 3;
 }
 
 message Prefix {
-    bio.net.Prefix addr = 1;
+    bio.net.Prefix pfx = 1;
     uint32 origin_asn = 2;
     uint32 next_asn = 3;
     map<string, string> metadata = 4;
@@ -38,15 +37,53 @@ message Protocol {
     map<string, string> metadata = 2;
 }
 
+message Interface {
+    uint32 id = 1;
+    string name = 2;
+    map<string, string> metadata = 4;
+}
+
 message Flow {
     IPAddress agent = 1;
     VRF vrf = 2;
-    IPAddress src_ip = 3;
-    IPAddress dst_ip = 4;
-    IPAddress next_hop_ip = 5;
-    Protocol protocol = 6;
-    Port src_port = 7;
-    Port dst_port = 8;
-    uint64 packets_count = 9;
-    uint64 bytes_count = 10;
+    Interface int_in = 3;
+    Interface int_out = 4;
+    IPAddress src_ip = 5;
+    IPAddress dst_ip = 6;
+    IPAddress next_hop_ip = 7;
+    Prefix src_prefix = 8;
+    Prefix dst_prefix = 9;
+    Protocol protocol = 10;
+    Port src_port = 11;
+    Port dst_port = 12;
+    uint64 packets_count = 13;
+    uint64 bytes_count = 14;
+}
+
+message FlowRecord {
+    uint32 agent = 1;
+    uint32 vrf = 2;
+    uint32 int_in = 3;
+    uint32 int_out = 4;
+    uint32 src_ip = 5;
+    uint32 dst_ip = 6;
+    uint32 next_hop_ip = 7;
+    uint32 src_prefix = 8;
+    uint32 dst_prefix = 9;
+    uint32 protocol = 10;
+    uint32 src_port = 11;
+    uint32 dst_port = 12;
+    uint64 packets_count = 13;
+    uint64 bytes_count = 14;
+}
+
+message FlowFile {
+    repeated IPAddress ip_addresses = 1;
+    repeated Prefix prefixes = 2;
+    repeated ASN asns = 3;
+    repeated VRF vrfs = 4;
+    repeated Port ports = 5;
+    repeated Protocol protocols = 6;
+    repeated Interface interfaces = 7;
+    repeated FlowRecord flow_records = 8;
 }
