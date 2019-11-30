@@ -40,14 +40,13 @@ message Protocol {
 
 message Flow {
     IPAddress agent = 1;
-    VRF vrf = 13;
-    IPAddress src_ip = 2;
-    IPAddress dst_ip = 3;
-    IPAddress next_hop_ip = 4;
-    Protocol protocol = 10;
-    Port src_port = 11;
-    Port dst_port = 12;
-    
-    uint64 packets_count = 20;
-    uint64 bytes_count = 21;
+    VRF vrf = 2;
+    IPAddress src_ip = 3;
+    IPAddress dst_ip = 4;
+    IPAddress next_hop_ip = 5;
+    Protocol protocol = 6;
+    Port src_port = 7;
+    Port dst_port = 8;
+    uint64 packets_count = 9;
+    uint64 bytes_count = 10;
 }
